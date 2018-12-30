@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { InputComponent } from "./input/input-component";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./styled-bootstrap";

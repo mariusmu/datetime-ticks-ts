@@ -6,12 +6,11 @@ import replace from 'rollup-plugin-replace';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import { uglify } from 'rollup-plugin-uglify';
-import builtins from 'rollup-plugin-node-builtins'; 
+import builtins from 'rollup-plugin-node-builtins';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import postcss from 'rollup-plugin-postcss'
 const dev = 'development';
 const prod = 'production';
-
 const nodeEnv = parseNodeEnv(process.env.NODE_ENV);
 
 const plugins = [
@@ -24,7 +23,11 @@ const plugins = [
     postcss(),
 
     // nodeResolve makes rollup look for dependencies in the node_modules directory
-    nodeResolve(),
+    nodeResolve(
+        {
+            jsnext: true
+        }
+    ),
     commonjs({
         // All of our own sources will be ES6 modules, so only node_modules need to be resolved with cjs
         include: 'node_modules/**',
@@ -48,10 +51,18 @@ const plugins = [
                 'isElement',
                 'isValidElementType',
                 'ForwardRef'
-              ]
+            ]
 
         },
     }),
+    {
+        name: 'replace moment imports',
+        transform: code =>
+            ({
+                code: code.replace(/import\s*\*\s*as\s*moment/g, 'import moment'),
+                map: { mappings: '' }
+            })
+    },
     typescriptPlugin({
         // The current rollup-plugin-typescript includes an old version of typescript, so we import and pass our own version
         typescript,
@@ -60,6 +71,7 @@ const plugins = [
         // This instructs rollup-plugin-typescript to import tslib instead, which includes the same helpers
         // in proper format.
         importHelpers: true,
+
 
     }),
 ];
@@ -89,8 +101,8 @@ export default {
     output: {
         file: './build/bundle.js',
         format: 'iife',
-        sourcemap: true 
-        
+        sourcemap: true
+
     },
 };
 

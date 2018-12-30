@@ -1,7 +1,6 @@
 
 
-import { isNumber } from "util";
-const moment = require("moment");
+import * as moment from "moment";
 
 
 enum DateFormat {

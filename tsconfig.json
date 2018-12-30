@@ -13,7 +13,9 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "sourceMap": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "allowSyntheticDefaultImports": true,
+        
     },
     "files": [
         "app/index.tsx" 

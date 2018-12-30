@@ -3,7 +3,8 @@ import * as Flatpickr from 'react-flatpickr';
 import styled from "../styled-bootstrap";
 import 'flatpickr/dist/themes/material_green.css'
 import '../additional-styles.css';
-const moment = require("moment");
+import * as moment from "moment";
+
 
 interface ICalendarProps {
     callbackClose: (date: string) => void
