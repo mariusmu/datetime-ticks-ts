@@ -99,7 +99,7 @@ export class InputComponent extends React.Component<IInputComponentProps, IInput
                 <CenteredDiv>
                     <h1>Convert between ticks</h1>
                     <div>
-                        <InputField onChange={this.handleInput} value={this.state.input} />
+                        <InputField onChange={this.handleInput} placeholder="Enter a tick or a date" value={this.state.input} />
                         <CalendarButton onClick={this.toggleInputBox}>
                             <FontAwesomeIcon icon={faCalendar} />
                         </CalendarButton>

@@ -9,12 +9,12 @@ interface IWrapperProps {
 }
 
 const wrapperStyle = {
-    background: '#18181c',
-    width: '100%',
-    height: '100vh',
-    'paddingTop': '50px',
-    display: 'flex'
-}
+    background: "#18181c",
+    width: "100%",
+    height: "100vh",
+    "paddingTop": "50px",
+    display: "flex"
+};
 
 const InlineWrapper = styled.div`
     margin: 0 auto;
@@ -34,6 +34,6 @@ export default class WrapperComponent extends React.Component<IWrapperProps, {}>
                     </InlineWrapper>
                 </div>
             </ThemeProvider>
-        )
+        );
     }
 }

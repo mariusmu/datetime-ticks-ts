@@ -7,7 +7,7 @@ import * as moment from "moment";
 
 
 interface ICalendarProps {
-    callbackClose: (date: string) => void
+    callbackClose: (date: string) => void;
 }
 
 interface ICalendarState {
