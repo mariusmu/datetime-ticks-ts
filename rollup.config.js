@@ -9,6 +9,8 @@ import { uglify } from 'rollup-plugin-uglify';
 import builtins from 'rollup-plugin-node-builtins';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import postcss from 'rollup-plugin-postcss'
+import svg from 'rollup-plugin-svg';
+
 const dev = 'development';
 const prod = 'production';
 const nodeEnv = parseNodeEnv(process.env.NODE_ENV);
@@ -21,6 +23,7 @@ const plugins = [
     // globals(),
     builtins(),
     postcss(),
+    svg(),
 
     // nodeResolve makes rollup look for dependencies in the node_modules directory
     nodeResolve(
@@ -83,6 +86,7 @@ if (nodeEnv === dev) {
 
     plugins.push(serve({
         port: 3000,
+        contentBase: '',
         historyApiFallback: true,
     }));
     plugins.push(livereload());
@@ -99,7 +103,7 @@ export default {
     external: ["electron", "electron-reloader", "path", "url"],
     input: './app/index.tsx',
     output: {
-        file: './build/bundle.js',
+        file: 'bundle.js',
         format: 'iife',
         sourcemap: true
 

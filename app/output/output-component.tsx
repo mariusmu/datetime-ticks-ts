@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export interface IOutputComponent {
     text: number;
-    icon: string;
+    icon: JSX.Element;
     desc: string;
     converter(input: number): string;
 }
@@ -11,6 +11,7 @@ export interface IOutputComponent {
 export class OutputComponent extends React.Component<IOutputComponent, {}> {
 
     render() {
+        const TextField = styled.div`margin-top: 6px;`;
 
         const CenteredField = styled.div`
             margin: 20px auto;
@@ -19,17 +20,20 @@ export class OutputComponent extends React.Component<IOutputComponent, {}> {
 
         const OutputField = styled.div`
             font-size: 1.2em;
+            float: left;
+            margin-right: 20px;
             padding-bottom: 10px;`;
 
         const text = this.props.converter(this.props.text);
+    
 
         return (
             <CenteredField>
                 <OutputField>
-                    {text}
+                    <TextField>{text}</TextField>
                 </OutputField>
                 {this.props.icon}
-            </CenteredField>
+             </CenteredField>
         )
     };
 }

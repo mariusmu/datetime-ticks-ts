@@ -1,5 +1,7 @@
 
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, remote } = require('electron');
+const { autoUpdater } = require('electron-updater');
+
 const fs = require("fs");
 const path = require('path');
 var env = process.argv[2] || 'dev';
@@ -36,25 +38,25 @@ function init() {
     win.on('closed', () => {
         DEBUG("closed");
         win = null;
+        setTimeout(() => app.quit(), 200) 
     });
 
 }
 
 app.on("ready", init);
 
-app.on("windows-all-closed", () => {
-    DEBUG("windows-all-closed");
-    if (process.platform !== "darwin") {
-        DEBUG("not darwin");
-        app.quit();
-
-    }
+app.on('before-quit', () => {
+    win.removeAllListeners('close');
+    win.close();
+    win = null;
+ 
 });
 
 app.on("activate", () => {
     if (win === null) {
         init();
     }
+    autoUpdater.checkForUpdatesAndNotify();
 });
 
 

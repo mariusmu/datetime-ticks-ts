@@ -18,4 +18,4 @@ export const theme = {
 };
 
 export default styled;
-export { css, keyframes, ThemeProvider };
+    export { css, keyframes, ThemeProvider };
