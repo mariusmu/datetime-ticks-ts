@@ -25,7 +25,7 @@ const CenteredDiv = styled.div`
 `;
 
 const InputField = styled.input`
-  min-width: 370px;
+  min-width: 300px;
   padding: 10px 15px;
   border-radius: 12px;
   border: none;
@@ -129,6 +129,7 @@ export class InputComponent extends React.Component<
         />
       </svg>
     );
+    const windowWidth = window.innerWidth;
 
     return (
       <div>

@@ -1,16 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 export interface IOutputComponent {
     text: number;
     icon: JSX.Element;
     desc: string;
-    converter(input: number): string;
+    converter(input: number, windowWidth: number): string;
 }
 
 export class OutputComponent extends React.Component<IOutputComponent, {}> {
 
     render() {
+        const windowWidth = window.innerWidth;
         const TextField = styled.div`margin-top: 6px;`;
 
         const CenteredField = styled.div`
@@ -24,15 +26,15 @@ export class OutputComponent extends React.Component<IOutputComponent, {}> {
             margin-right: 20px;
             padding-bottom: 10px;`;
 
-        const text = this.props.converter(this.props.text);
+        const text = this.props.converter(this.props.text, windowWidth);
     
-
+        const shouldRemoveIcon = (windowWidth < 600 && this.props.desc === "To string");
         return (
             <CenteredField>
                 <OutputField>
                     <TextField>{text}</TextField>
                 </OutputField>
-                {this.props.icon}
+                {shouldRemoveIcon ? "" : this.props.icon}
              </CenteredField>
         )
     };
