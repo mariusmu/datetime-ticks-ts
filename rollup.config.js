@@ -3,11 +3,11 @@ import typescriptPlugin from 'rollup-plugin-typescript';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
+import builtins from 'rollup-plugin-node-builtins'
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import { uglify } from 'rollup-plugin-uglify';
-import builtins from 'rollup-plugin-node-builtins';
-import sourceMaps from 'rollup-plugin-sourcemaps';
+import globals from 'rollup-plugin-node-globals'
 import postcss from 'rollup-plugin-postcss'
 import svg from 'rollup-plugin-svg';
 
@@ -15,13 +15,13 @@ const dev = 'development';
 const prod = 'production';
 const nodeEnv = parseNodeEnv(process.env.NODE_ENV);
 
+console.log(JSON.stringify(process.env));
 const plugins = [
     replace({
         // The react sources include a reference to process.env.NODE_ENV so we need to replace it here with the actual value
         'process.env.NODE_ENV': JSON.stringify(nodeEnv),
     }),
     // globals(),
-    builtins(),
     postcss(),
     svg(),
 
@@ -31,6 +31,7 @@ const plugins = [
             jsnext: true
         }
     ),
+    builtins(),
     commonjs({
         // All of our own sources will be ES6 modules, so only node_modules need to be resolved with cjs
         include: 'node_modules/**',
@@ -57,7 +58,10 @@ const plugins = [
             ]
 
         },
+
     }),
+    
+    globals(),
     {
         name: 'replace moment imports',
         transform: code =>
@@ -83,7 +87,7 @@ const plugins = [
 if (nodeEnv === dev) {
     // For playing around with just frontend code the serve plugin is pretty nice.
     // We removed it when we started doing actual backend work.
-
+    console.warn("Running in dev");
     plugins.push(serve({
         port: 3000,
         contentBase: '',
@@ -95,12 +99,13 @@ if (nodeEnv === dev) {
 }
 
 if (nodeEnv === prod) {
+    console.warn("Running in prod");
     plugins.push(uglify());
 }
 
 export default {
     plugins,
-    external: ["electron", "electron-reloader", "path", "url"],
+    external: ["path", "url"],
     input: './app/index.tsx',
     output: {
         file: 'bundle.js',
