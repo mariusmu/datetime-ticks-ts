@@ -90,7 +90,7 @@ if (nodeEnv === dev) {
     console.warn("Running in dev");
     plugins.push(serve({
         port: 3000,
-        contentBase: '',
+        contentBase: 'build',
         historyApiFallback: true,
     }));
     plugins.push(livereload());
@@ -108,7 +108,7 @@ export default {
     external: ["path", "url"],
     input: './app/index.tsx',
     output: {
-        file: 'bundle.js',
+        file: 'build/bundle.js',
         format: 'iife',
         sourcemap: true
 

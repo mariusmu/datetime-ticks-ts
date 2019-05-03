@@ -1,7 +1,10 @@
 # application
-build
+build/bundle.js
+build/bundle.js.map
 dist
 releases
+
+
 
 # Logs
 logs
