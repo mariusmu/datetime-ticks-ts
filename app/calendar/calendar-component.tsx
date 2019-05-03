@@ -30,7 +30,8 @@ export class CalendarComponent extends React.Component<ICalendarProps, ICalendar
             padding: 7px 10px;
             margin-top: 20px;
             background: white;
-            border-radius: 10px;    
+            border-radius: 10px; 
+            margin-right: 10px;   
         `;
 
         return (
@@ -38,6 +39,9 @@ export class CalendarComponent extends React.Component<ICalendarProps, ICalendar
                 <DatePicker data-enable-time onChange={(date) => self.setState({ date: date[0]})} options={{ inline: true, static: true, altInputClass: "input-hidden" }} />
                 <StyledButton onClick={() => self.props.callbackClose(moment(this.state.date).toString())}>
                 Choose date
+                </StyledButton>
+                <StyledButton onClick={() => self.props.callbackClose("")}>
+                Close
                 </StyledButton>
             </div>
         );

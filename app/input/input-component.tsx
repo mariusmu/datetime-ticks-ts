@@ -71,8 +71,12 @@ export class InputComponent extends React.Component<
   }
 
   handleCalendarInput(date: string) {
-    if (date === undefined) {
+    if (date === undefined || date.length === 0) {
+      this.setState({
+        popupOpen: false
+      });
       return;
+      
     }
     this.setState({
       jsTick: new Date(date).getTime(),
@@ -80,7 +84,7 @@ export class InputComponent extends React.Component<
       input: date
     });
   }
-
+11
   render() {
     const CalendarPopup = styled.div`
       display: ${this.state.popupOpen ? "flex" : "hidden"};
