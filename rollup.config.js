@@ -10,6 +10,9 @@ import { uglify } from 'rollup-plugin-uglify';
 import globals from 'rollup-plugin-node-globals'
 import postcss from 'rollup-plugin-postcss'
 import svg from 'rollup-plugin-svg';
+import replaceHtmlVars from 'rollup-plugin-replace-html-vars';
+import copy from 'rollup-plugin-copy'
+import fs from "fs";
 
 const dev = 'development';
 const prod = 'production';
@@ -21,10 +24,11 @@ const plugins = [
         // The react sources include a reference to process.env.NODE_ENV so we need to replace it here with the actual value
         'process.env.NODE_ENV': JSON.stringify(nodeEnv),
     }),
+
     // globals(),
     postcss(),
     svg(),
-
+    
     // nodeResolve makes rollup look for dependencies in the node_modules directory
     nodeResolve(
         {
@@ -32,6 +36,16 @@ const plugins = [
         }
     ),
     builtins(),
+    function(options) {
+        console.log("Will copy");
+        fs.copyFileSync("index.html", "build/index.html");
+        console.log("Done copying");
+        replaceHtmlVars({
+            files: 'build/index.html',
+            from: /\${timestamp}/g,
+            to: Date.now(),
+        })
+    }(),
     commonjs({
         // All of our own sources will be ES6 modules, so only node_modules need to be resolved with cjs
         include: 'node_modules/**',
@@ -81,6 +95,8 @@ const plugins = [
 
 
     }),
+  
+    
 ];
 
 
@@ -101,6 +117,7 @@ if (nodeEnv === dev) {
 if (nodeEnv === prod) {
     console.warn("Running in prod");
     plugins.push(uglify());
+ 
 }
 
 export default {
