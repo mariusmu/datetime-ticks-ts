@@ -14,7 +14,7 @@ const wrapperStyle = {
     height: "100vh",
     "paddingTop": "50px",
     display: "flex",
-    "padding": "20px"
+    "padding": "0px"
 };
 
 const InlineWrapper = styled.div`

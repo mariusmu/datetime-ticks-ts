@@ -18,10 +18,12 @@ export class OutputComponent extends React.Component<IOutputComponent, {}> {
         const CenteredField = styled.div`
             margin: 20px auto;
             border-bottom: 1px dotted white;
-            -webkit-app-region: no-drag;`;
+            height: 50px;
+            `;
 
         const OutputField = styled.div`
             font-size: 1.2em;
+            height: 100px;
             float: left;
             margin-right: 20px;
             padding-bottom: 10px;`;

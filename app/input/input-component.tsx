@@ -21,6 +21,7 @@ interface IInputComponentState {
 
 const CenteredDiv = styled.div`
   display: flex;
+  flex-shrink: 2;
   flex-direction: column;
 `;
 
