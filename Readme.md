@@ -11,7 +11,7 @@ Go to https://ticks.cloud
 - Styled Components
 - MomentJS
 - Typescript
-- Rollup
+- Parcel
 
 ## Contact
 mariussmk@gmail.com
