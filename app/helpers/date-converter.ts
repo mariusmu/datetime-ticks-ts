@@ -21,7 +21,7 @@ function isCsharpTick(input: string): boolean {
     return false;
 }
 
-function convertToJSTickFromCsharpTick(input: string): number {
+export function convertToJSTickFromCsharpTick(input: string): number {
     return ((+input - csharpEpoch) / 10000);
 }
 
