@@ -10,8 +10,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { CalendarComponent } from "../calendar/calendar-component";
+import { version } from "../version";
 
-interface IInputComponentProps {}
+interface IInputComponentProps { }
 
 interface IInputComponentState {
   jsTick: number;
@@ -23,6 +24,8 @@ const CenteredDiv = styled.div`
   display: flex;
   flex-shrink: 2;
   flex-direction: column;
+  height: 95vh;
+  flex-grow: 1;
 `;
 
 const InputField = styled.input`
@@ -37,6 +40,7 @@ const InputField = styled.input`
   font-size: 1.2em;
 `;
 
+
 const CalendarButton = styled.button`
   padding: 5px;
   background: none;
@@ -45,6 +49,19 @@ const CalendarButton = styled.button`
   margin-left: 0.5em;
   border: none;
 `;
+
+const Footer = styled.footer`
+  display: flex;
+  align-self: center;
+  justify-content: center;
+`;
+
+const FooterBox = styled.div`
+  background: #293036;
+  padding: 10px;
+  display: flex;
+  font-size: 12px;
+`
 
 export class InputComponent extends React.Component<
   IInputComponentProps,
@@ -77,7 +94,7 @@ export class InputComponent extends React.Component<
         popupOpen: false
       });
       return;
-      
+
     }
     this.setState({
       jsTick: new Date(date).getTime(),
@@ -85,7 +102,7 @@ export class InputComponent extends React.Component<
       input: date
     });
   }
-11
+  11
   render() {
     const CalendarPopup = styled.div`
       display: ${this.state.popupOpen ? "flex" : "hidden"};
@@ -177,7 +194,14 @@ export class InputComponent extends React.Component<
             desc="dotnet-Tick"
             converter={convertToCsharpTick}
           />
+      
         </CenteredDiv>
+          <Footer>
+            <FooterBox>
+              Version {version}
+            </FooterBox>
+          </Footer>
+
       </div>
     );
   }
