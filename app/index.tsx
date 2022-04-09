@@ -1,9 +1,8 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import WrapperComponent from './wrapper';
 import 'react-app-polyfill/ie11';
 import './additional-styles.css';
 
-ReactDOM.render(
-    <WrapperComponent />
-, document.getElementById("app"));
+const root = ReactDOM.createRoot(document.getElementById("app") as any);
+root.render(<WrapperComponent/>);
