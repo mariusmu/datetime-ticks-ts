@@ -50,7 +50,7 @@
             "flatpickr": "^4.6.9",
             "font-awesome": "4.7.0",
             "history": "5.0.1",
-            "moment": "^2.29.1",
+            "moment": "^2.29.2",
             "react": "17.0.2",
             "react-app-polyfill": "^2.0.0",
             "react-datetime": "^3.1.1",
