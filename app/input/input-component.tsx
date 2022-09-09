@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { CalendarComponent } from "../calendar/calendar-component";
 import { version } from "../version";
+import * as GithubLogo from "../../image/github.png";
+import { Link } from "react-router-dom";
 
 interface IInputComponentProps { }
 
@@ -61,6 +63,7 @@ const FooterBox = styled.div`
   padding: 10px;
   display: flex;
   font-size: 12px;
+  margin-right: 12px;
 `
 
 export class InputComponent extends React.Component<
@@ -199,6 +202,11 @@ export class InputComponent extends React.Component<
           <Footer>
             <FooterBox>
               Version {version}
+            </FooterBox>
+            <FooterBox>
+              <a href="https://github.com/mariusmu/datetime-ticks-ts">
+                <img width="16" src={GithubLogo} alt="Github logo"/>
+              </a>
             </FooterBox>
           </Footer>
 
