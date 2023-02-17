@@ -25,6 +25,10 @@ export function convertToJSTickFromCsharpTick(input: string): number {
     return ((+input - csharpEpoch) / 10000);
 }
 
+export function convertToJsTickFromUnixTick(input: number): number {
+    return moment.unix(input).valueOf()
+}
+
 function determineType(input: string): DateFormat {
     if (isRawString(input)) return DateFormat.Raw;
     if (moment(+input).isValid()) return DateFormat.JsTick;
@@ -32,7 +36,10 @@ function determineType(input: string): DateFormat {
     return DateFormat.Uknown;
 }
 
-export function getInputAsJsTick(input: string): number {
+export function getInputAsJsTick(input: string, isUnixTickTick: boolean): number {
+    if (isUnixTickTick === true) {
+        return convertToJsTickFromUnixTick(+input);
+    }
     const type = determineType(input);
     switch (type) {
         case DateFormat.JsTick:
@@ -64,4 +71,8 @@ export function convertToJsTick(jsTick: number) {
 
 export function convertToString(jsTick: number): string {
     return moment(jsTick).toString();
+}
+
+export function convertToUnixTick(input: number): string {
+    return moment(input).unix().toString();
 }

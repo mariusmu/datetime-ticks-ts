@@ -5,7 +5,8 @@ import {
   getInputAsJsTick,
   convertToString,
   convertToJsTick,
-  convertToCsharpTick
+  convertToCsharpTick,
+  convertToUnixTick
 } from "../helpers/date-converter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +14,7 @@ import { CalendarComponent } from "../calendar/calendar-component";
 import { version } from "../version";
 import * as GithubLogo from "../../image/github.png";
 import { Link } from "react-router-dom";
+import { LinuxSVGCommon } from "../svg/linux";
 
 interface IInputComponentProps { }
 
@@ -20,6 +22,7 @@ interface IInputComponentState {
   jsTick: number;
   popupOpen: boolean;
   input: string;
+  isLinuxInput: boolean;
 }
 
 const CenteredDiv = styled.div`
@@ -41,7 +44,6 @@ const InputField = styled.input`
   color: #18181c;
   font-size: 1.2em;
 `;
-
 
 const CalendarButton = styled.button`
   padding: 5px;
@@ -66,6 +68,18 @@ const FooterBox = styled.div`
   margin-right: 12px;
 `
 
+const LinuxButton = styled.div`
+  margin-top: 5px;
+  margin-left: 15px;
+`;
+
+const ButtonRow = styled.div`
+  paddding-left: 5px;
+  margin-top: 7px;
+  display: flex;
+  float: right;
+`;
+
 export class InputComponent extends React.Component<
   IInputComponentProps,
   IInputComponentState
@@ -74,15 +88,21 @@ export class InputComponent extends React.Component<
     super(props);
     //this.handleInput = this.handleInput.bind(this);
     this.toggleInputBox = this.toggleInputBox.bind(this);
-    this.state = { jsTick: -1, popupOpen: false, input: "" };
+    this.state = { jsTick: -1, popupOpen: false, input: "", isLinuxInput: false };
     this.handleCalendarInput = this.handleCalendarInput.bind(this);
+    this.toggleIsLinuxInput = this.toggleIsLinuxInput.bind(this);
+    // this.handleInput = this.handleCalendarInput.bind(this);
+  }
+
+  public toggleIsLinuxInput(event: any) {
+    this.setState({ isLinuxInput: !this.state.isLinuxInput });
   }
 
   public handleInput(event: any) {
     if (event.target.value === undefined) {
       return;
     }
-    const getAsJsTick = getInputAsJsTick(event.target.value);
+    const getAsJsTick = getInputAsJsTick(event.target.value, this.state.isLinuxInput);
     this.setState({ jsTick: getAsJsTick, input: event.target.value });
     return getAsJsTick;
   }
@@ -105,7 +125,7 @@ export class InputComponent extends React.Component<
       input: date
     });
   }
-  11
+  
   render() {
     const CalendarPopup = styled.div`
       display: ${this.state.popupOpen ? "flex" : "hidden"};
@@ -154,6 +174,8 @@ export class InputComponent extends React.Component<
         />
       </svg>
     );
+
+    
     const windowWidth = window.innerWidth;
 
     return (
@@ -175,9 +197,14 @@ export class InputComponent extends React.Component<
               placeholder="Enter a tick or a date"
               value={this.state.input}
             />
-            <CalendarButton onClick={this.toggleInputBox}>
-              <FontAwesomeIcon icon={faCalendar} />
-            </CalendarButton>
+            <ButtonRow>
+            <LinuxButton onClick={this.toggleIsLinuxInput}>
+                <LinuxSVGCommon color={this.state.isLinuxInput ? "yellow" : "white"}/>
+              </LinuxButton>
+              <CalendarButton onClick={this.toggleInputBox}>
+                <FontAwesomeIcon icon={faCalendar} />
+              </CalendarButton>
+            </ButtonRow>
           </div>
           <OutputComponent
             icon={svgAtom}
@@ -196,6 +223,12 @@ export class InputComponent extends React.Component<
             text={this.state.jsTick}
             desc="dotnet-Tick"
             converter={convertToCsharpTick}
+          />
+          <OutputComponent
+            icon={<LinuxSVGCommon color="#fff"></LinuxSVGCommon>}
+            text={this.state.jsTick}
+            desc="unix-Tick"
+            converter={convertToUnixTick}
           />
       
         </CenteredDiv>
