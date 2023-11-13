@@ -25,7 +25,8 @@
         ],
         "testMatch": [
             "**/__tests__/*.(test|spec).(ts|tsx|js)"
-        ]
+        ],
+        "testPathIgnorePatterns": ["dist/*"]
     },
     "devDependencies": {
         "@types/jest": "29.5.8",
