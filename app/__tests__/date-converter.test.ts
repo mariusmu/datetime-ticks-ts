@@ -26,7 +26,7 @@ test("convert to javascript human readable date string 2020-12-15", () => {
 });
 
 test("convert to unix tick from jstick date 2020-12-15 00:00 UTC", () => {
-    expect(convertToUnixTick(1607990400000)).toBe(1607990400);
+    expect(convertToUnixTick(1607990400000)).toBe("1607990400");
 });
 
 test("convert to js tick from unix tick date 2020-12-15 00:00 UTC", () => {
