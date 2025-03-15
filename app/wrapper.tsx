@@ -1,15 +1,7 @@
 import * as React from "react";
-import {
-    Routes,
-    Route,
-    Link,
-    Outlet,
-    Router
-  } from "react-router-dom";
 import { InputComponent } from "./input/input-component";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./styled-bootstrap";
-import { BrowserRouter } from "react-router-dom";
 
 
 interface IWrapperProps {
@@ -36,13 +28,9 @@ export default class WrapperComponent extends React.Component<IWrapperProps, {}>
         return (
             <ThemeProvider theme={theme}>
                 <div style={wrapperStyle}>
-                    <BrowserRouter>
-                        <InlineWrapper>
-                            <Routes>
-                                <Route path="/" element={<InputComponent/>} />
-                            </Routes>
-                        </InlineWrapper>
-                    </BrowserRouter>
+                    <InlineWrapper>
+                        <InputComponent/>
+                    </InlineWrapper>
                 </div>
             </ThemeProvider>
         );
