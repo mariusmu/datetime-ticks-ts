@@ -10,10 +10,8 @@ import {
 } from "../helpers/date-converter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { CalendarComponent } from "../calendar/calendar-component";
-import { version } from "../version";
-import * as GithubLogo from "../../image/github.png";
-import { Link } from "react-router-dom";
 import { LinuxSVGCommon } from "../svg/linux";
 
 interface IInputComponentProps { }
@@ -234,11 +232,11 @@ export class InputComponent extends React.Component<
         </CenteredDiv>
           <Footer>
             <FooterBox>
-              Version {version}
+              Version {process.env.PACKAGE_VERSION}
             </FooterBox>
             <FooterBox>
               <a href="https://github.com/mariusmu/datetime-ticks-ts">
-                <img width="16" src={GithubLogo} alt="Github logo"/>
+                <FontAwesomeIcon icon={faGithub} color="white" />
               </a>
             </FooterBox>
           </Footer>
