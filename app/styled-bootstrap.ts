@@ -1,13 +1,4 @@
-import * as styledComponents from "styled-components";
-
-const {
-  default: styled,
-  css,
-  keyframes,
-  ThemeProvider
-} = styledComponents as styledComponents.ThemedStyledComponentsModule<
-  IThemeInterface
->;
+import styled, { css, keyframes, ThemeProvider } from "styled-components";
 
 export interface IThemeInterface {
   primaryColor: string;

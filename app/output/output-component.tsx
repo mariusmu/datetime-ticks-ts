@@ -1,10 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { icon } from "@fortawesome/fontawesome-svg-core";
 
 export interface IOutputComponent {
     text: number;
-    icon: JSX.Element;
+    icon: React.JSX.Element;
     desc: string;
     converter(input: number, windowWidth: number): string;
 }

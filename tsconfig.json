@@ -14,8 +14,9 @@
         "sourceMap": true,
         "outDir": "dist",
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
-        
+        "esModuleInterop": true,
+        "skipLibCheck": true
+
     },
     "files": [
         "app/index.tsx" 

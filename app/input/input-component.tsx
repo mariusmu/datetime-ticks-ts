@@ -173,9 +173,6 @@ export class InputComponent extends React.Component<
       </svg>
     );
 
-    
-    const windowWidth = window.innerWidth;
-
     return (
       <div>
         {this.state.popupOpen ? (
