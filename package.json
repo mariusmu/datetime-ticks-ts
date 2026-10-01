@@ -50,7 +50,7 @@
         "@types/styled-components": "5.1.36",
         "concurrently": "10.0.5",
         "font-awesome": "4.7.0",
-        "moment": "^2.30.1",
+        "moment": "^2.31.0",
         "react": "19.2.8",
         "react-dom": "19.2.8",
         "react-flatpickr": "4.0.11",
